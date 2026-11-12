@@ -1,0 +1,16 @@
+# The hall office Telegram bot (php artisan telegram:poll), always running.
+# Install: cp to /etc/systemd/system/, then systemctl enable --now hall-telegram
+[Unit]
+Description=HallDesk hall office Telegram bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=www-data
+WorkingDirectory=/opt/hall
+ExecStart=/usr/bin/php artisan telegram:poll
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
